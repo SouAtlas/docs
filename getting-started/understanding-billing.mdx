@@ -1,0 +1,279 @@
+---
+title: "Entendendo Minutos de Ligação e Faturamento"
+description: "Como funciona a cobrança na plataforma Sofia"
+---
+
+# Entendendo Minutos de Ligação e Faturamento
+
+A Sofia utiliza um modelo de cobrança transparente baseado no uso real da plataforma. Entenda como funciona o faturamento e como otimizar seus custos.
+
+## Modelo de Cobrança
+
+### Cobrança por Minutos
+A cobrança principal é baseada em **minutos de conversa efetiva**:
+- Contabiliza apenas o tempo de conversa ativa
+- Não inclui tempo de discagem ou toque
+- Arredondamento para o minuto superior
+
+### Componentes do Faturamento
+
+<CardGroup cols={2}>
+  <Card title="Minutos de Ligação" icon="clock">
+    Tempo efetivo de conversa com os assistentes de IA
+  </Card>
+  <Card title="Aluguel de Números" icon="phone">
+    Taxa mensal por número de telefone ativo
+  </Card>
+  <Card title="Recursos Premium" icon="star">
+    Clonagem de voz, integrações avançadas, etc.
+  </Card>
+  <Card title="Armazenamento" icon="database">
+    Gravações, logs e dados históricos
+  </Card>
+</CardGroup>
+
+## Detalhamento de Preços
+
+### Minutos de Ligação
+
+#### Ligações Nacionais (Brasil)
+| Tipo | Preço por Minuto |
+|------|------------------|
+| Fixo para Fixo | R$ 0,05 |
+| Fixo para Móvel | R$ 0,15 |
+| Móvel para Fixo | R$ 0,12 |
+| Móvel para Móvel | R$ 0,18 |
+
+#### Ligações Internacionais
+| Região | Preço por Minuto |
+|--------|------------------|
+| América do Norte | R$ 0,25 |
+| Europa | R$ 0,30 |
+| América Latina | R$ 0,35 |
+| Ásia | R$ 0,40 |
+| Outros | R$ 0,50 |
+
+### Aluguel de Números
+
+#### Números Nacionais
+| Tipo | Preço Mensal |
+|------|--------------|
+| Número Local | R$ 15,00 |
+| Número 0800 | R$ 45,00 |
+| Número Premium | R$ 25,00 |
+
+#### Números Internacionais
+| País | Preço Mensal |
+|------|--------------|
+| Estados Unidos | R$ 35,00 |
+| Reino Unido | R$ 40,00 |
+| Canadá | R$ 35,00 |
+| Argentina | R$ 50,00 |
+| Outros | Consultar |
+
+## Como os Minutos são Contabilizados
+
+### Início da Contabilização
+A cobrança inicia quando:
+- A ligação é atendida (receptiva)
+- A conexão é estabelecida (ativa)
+- O assistente começa a falar
+
+### Fim da Contabilização
+A cobrança para quando:
+- A ligação é encerrada por qualquer parte
+- Transferência para operador humano
+- Timeout por inatividade
+
+### Exemplos Práticos
+
+<Tabs>
+  <Tab title="Ligação Receptiva">
+    ```
+    09:00:00 - Cliente liga
+    09:00:03 - Ligação conecta
+    09:00:05 - Assistente atende: "Olá!"
+    ⏰ INÍCIO DA COBRANÇA
+    09:02:30 - Conversa termina
+    ⏰ FIM DA COBRANÇA
+    
+    Tempo cobrado: 2 minutos e 25 segundos = 3 minutos
+    ```
+  </Tab>
+  <Tab title="Ligação Ativa">
+    ```
+    14:00:00 - Sofia inicia ligação
+    14:00:08 - Cliente atende
+    14:00:10 - Assistente fala: "Oi, aqui é a Maria..."
+    ⏰ INÍCIO DA COBRANÇA
+    14:01:45 - Cliente desliga
+    ⏰ FIM DA COBRANÇA
+    
+    Tempo cobrado: 1 minuto e 35 segundos = 2 minutos
+    ```
+  </Tab>
+  <Tab title="Transferência">
+    ```
+    10:00:00 - Ligação inicia
+    10:00:05 - Assistente atende
+    ⏰ INÍCIO DA COBRANÇA
+    10:01:20 - Transfere para humano
+    ⏰ FIM DA COBRANÇA (Sofia)
+    10:01:25 - Operador atende
+    10:05:00 - Ligação termina
+    
+    Tempo cobrado Sofia: 1 minuto e 15 segundos = 2 minutos
+    Tempo com operador: NÃO cobrado pela Sofia
+    ```
+  </Tab>
+</Tabs>
+
+## Recursos Premium
+
+### Clonagem de Voz
+- **Setup inicial**: R$ 500,00 por voz
+- **Uso mensal**: R$ 100,00 por voz ativa
+- Inclui até 50 horas de áudio por mês
+
+### Integrações Avançadas
+- **APIs customizadas**: R$ 200,00/mês
+- **Webhooks ilimitados**: R$ 100,00/mês
+- **Suporte prioritário**: R$ 300,00/mês
+
+### Armazenamento Adicional
+- **Gravações**: R$ 0,10 por hora armazenada
+- **Logs detalhados**: R$ 50,00/mês (ilimitado)
+- **Backup premium**: R$ 100,00/mês
+
+## Planos Disponíveis
+
+### Plano Starter
+- **Custo fixo**: R$ 99,00/mês
+- **Inclui**: 500 minutos
+- **Números**: 1 número local incluído
+- **Assistentes**: Até 3 assistentes
+- **Suporte**: Email
+
+### Plano Professional
+- **Custo fixo**: R$ 299,00/mês
+- **Inclui**: 2.000 minutos
+- **Números**: 3 números incluídos
+- **Assistentes**: Até 10 assistentes
+- **Suporte**: Chat + Email
+- **Extras**: Webhooks incluídos
+
+### Plano Enterprise
+- **Custo**: Sob consulta
+- **Inclui**: Minutos customizados
+- **Números**: Ilimitados
+- **Assistentes**: Ilimitados
+- **Suporte**: Dedicado 24/7
+- **Extras**: Tudo incluído + customizações
+
+## Otimização de Custos
+
+### Dicas para Reduzir Gastos
+
+#### 1. Otimize a Duração das Ligações
+- Configure timeouts apropriados
+- Treine assistentes para serem objetivos
+- Use prompts eficientes
+
+#### 2. Escolha Horários Estratégicos
+- Evite horários de pico quando possível
+- Considere fusos horários para internacionais
+- Use agendamento inteligente
+
+#### 3. Gerencie Números Ativos
+- Desative números não utilizados
+- Consolide operações em menos números
+- Monitore uso por número
+
+#### 4. Use Transferências Inteligentes
+- Configure critérios claros para transferência
+- Evite transferências desnecessárias
+- Treine assistentes para resolver mais casos
+
+### Monitoramento de Custos
+
+#### Dashboard de Faturamento
+- Acompanhe gastos em tempo real
+- Defina alertas de limite
+- Analise tendências de uso
+
+#### Relatórios Detalhados
+- Custo por campanha
+- Eficiência por assistente
+- ROI por tipo de ligação
+
+## Faturamento e Pagamento
+
+### Ciclo de Faturamento
+- **Fechamento**: Todo dia 1º do mês
+- **Vencimento**: 10 dias após fechamento
+- **Cobrança**: Automática via cartão/boleto
+
+### Métodos de Pagamento
+- Cartão de crédito (automático)
+- Boleto bancário
+- PIX (para valores acima de R$ 1.000)
+- Transferência bancária (Enterprise)
+
+### Política de Créditos
+- Créditos não utilizados não expiram
+- Reembolso disponível em até 30 dias
+- Créditos promocionais têm validade específica
+
+## Alertas e Controles
+
+### Configuração de Limites
+```javascript
+// Exemplo de configuração
+{
+  "limite_mensal": 5000.00,
+  "alerta_80_porcento": true,
+  "pausa_automatica": true,
+  "notificacao_email": "admin@empresa.com"
+}
+```
+
+### Tipos de Alertas
+- **80% do limite**: Aviso preventivo
+- **95% do limite**: Alerta crítico
+- **100% do limite**: Pausa automática (opcional)
+
+<Warning>
+  **Importante**: Configure sempre limites de gastos para evitar surpresas na fatura. A Sofia oferece controles granulares para gestão de custos.
+</Warning>
+
+## FAQ Faturamento
+
+<AccordionGroup>
+  <Accordion title="Como funciona a cobrança de ligações não atendidas?">
+    Ligações que não são atendidas (cai na caixa postal, ocupado, etc.) não são cobradas. A cobrança só inicia quando há conexão efetiva.
+  </Accordion>
+  
+  <Accordion title="Posso mudar de plano durante o mês?">
+    Sim, mudanças de plano são aplicadas imediatamente. O valor é calculado proporcionalmente aos dias restantes do ciclo.
+  </Accordion>
+  
+  <Accordion title="Como funciona a cobrança de números internacionais?">
+    Números internacionais têm taxa de aluguel mensal fixa mais o custo por minuto das ligações realizadas.
+  </Accordion>
+  
+  <Accordion title="Existe desconto para alto volume?">
+    Sim, oferecemos descontos progressivos para volumes acima de 10.000 minutos/mês. Entre em contato para negociar.
+  </Accordion>
+</AccordionGroup>
+
+## Próximos Passos
+
+Agora que você entende o faturamento:
+
+1. **[Crie seu primeiro assistente](/ai-assistants/creating-and-editing)** - Comece a usar a plataforma
+2. **[Configure números](/phone-numbers/purchasing-and-managing)** - Adquira seus números
+3. **[Monitore custos](/pricing/overview)** - Acompanhe seus gastos
+
+<Note>
+  Para dúvidas específicas sobre faturamento, entre em contato com nosso suporte financeiro: financeiro@sofia.ai
+</Note>

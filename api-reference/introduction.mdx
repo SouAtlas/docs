@@ -1,33 +1,329 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: "Introdução à API"
+description: "Documentação completa da API REST da Sofia"
 ---
 
+# Introdução à API da Sofia
+
+A API REST da Sofia permite integrar nossa plataforma de IA conversacional com seus sistemas existentes. Com ela, você pode criar assistentes, gerenciar ligações, acessar dados e automatizar fluxos de trabalho.
+
+## Visão Geral
+
+### URL Base
+```
+https://api.sofia.ai/v1
+```
+
+### Autenticação
+A API utiliza autenticação via API Key no header:
+```http
+Authorization: Bearer sua_api_key_aqui
+```
+
+### Formato de Dados
+- **Request**: JSON
+- **Response**: JSON
+- **Encoding**: UTF-8
+- **Date Format**: ISO 8601 (YYYY-MM-DDTHH:mm:ssZ)
+
+## Recursos Principais
+
+<CardGroup cols={2}>
+  <Card title="Assistentes" icon="robot">
+    Criar, configurar e gerenciar assistentes de IA
+  </Card>
+  <Card title="Ligações" icon="phone">
+    Iniciar, monitorar e controlar ligações
+  </Card>
+  <Card title="Números" icon="hash">
+    Gerenciar números de telefone e configurações
+  </Card>
+  <Card title="Campanhas" icon="bullhorn">
+    Criar e executar campanhas de ligações em massa
+  </Card>
+  <Card title="Webhooks" icon="webhook">
+    Configurar notificações em tempo real
+  </Card>
+  <Card title="Analytics" icon="chart-bar">
+    Acessar métricas e relatórios detalhados
+  </Card>
+</CardGroup>
+
+## Autenticação
+
+### Obtendo sua API Key
+1. Acesse o [Dashboard Sofia](https://app.sofia.ai)
+2. Vá em **Configurações** > **API Keys**
+3. Clique em **"Gerar Nova Chave"**
+4. Copie e guarde sua chave com segurança
+
+### Exemplo de Autenticação
+```bash
+curl -X GET "https://api.sofia.ai/v1/assistants" \
+  -H "Authorization: Bearer sk_live_1234567890abcdef" \
+  -H "Content-Type: application/json"
+```
+
+<Warning>
+  **Segurança**: Nunca exponha sua API key em código client-side. Use sempre em ambiente servidor seguro.
+</Warning>
+
+## Rate Limits
+
+### Limites por Plano
+
+| Plano | Requests/minuto | Requests/hora | Requests/dia |
+|-------|-----------------|---------------|--------------|
+| Starter | 60 | 1,000 | 10,000 |
+| Professional | 300 | 5,000 | 50,000 |
+| Enterprise | 1,000 | 20,000 | 200,000 |
+
+### Headers de Rate Limit
+```http
+X-RateLimit-Limit: 60
+X-RateLimit-Remaining: 59
+X-RateLimit-Reset: 1640995200
+```
+
+## Códigos de Status HTTP
+
+### Códigos de Sucesso
+- `200 OK` - Requisição bem-sucedida
+- `201 Created` - Recurso criado com sucesso
+- `204 No Content` - Operação bem-sucedida sem retorno
+
+### Códigos de Erro
+- `400 Bad Request` - Dados inválidos na requisição
+- `401 Unauthorized` - API key inválida ou ausente
+- `403 Forbidden` - Sem permissão para o recurso
+- `404 Not Found` - Recurso não encontrado
+- `429 Too Many Requests` - Rate limit excedido
+- `500 Internal Server Error` - Erro interno do servidor
+
+## Formato de Resposta
+
+### Resposta de Sucesso
+```json
+{
+  "success": true,
+  "data": {
+    "id": "asst_1234567890",
+    "name": "Assistente de Vendas",
+    "status": "active"
+  },
+  "meta": {
+    "timestamp": "2024-01-15T10:30:00Z",
+    "request_id": "req_abcdef123456"
+  }
+}
+```
+
+### Resposta de Erro
+```json
+{
+  "success": false,
+  "error": {
+    "code": "INVALID_PARAMETER",
+    "message": "O campo 'name' é obrigatório",
+    "details": {
+      "field": "name",
+      "value": null
+    }
+  },
+  "meta": {
+    "timestamp": "2024-01-15T10:30:00Z",
+    "request_id": "req_abcdef123456"
+  }
+}
+```
+
+## Paginação
+
+### Parâmetros de Paginação
+```http
+GET /v1/assistants?page=2&limit=50&sort=created_at&order=desc
+```
+
+### Resposta Paginada
+```json
+{
+  "success": true,
+  "data": [...],
+  "pagination": {
+    "current_page": 2,
+    "per_page": 50,
+    "total_pages": 10,
+    "total_items": 500,
+    "has_next": true,
+    "has_prev": true
+  }
+}
+```
+
+## Filtros e Busca
+
+### Filtros Disponíveis
+```http
+GET /v1/calls?status=completed&date_from=2024-01-01&date_to=2024-01-31
+```
+
+### Busca por Texto
+```http
+GET /v1/assistants?search=vendas&fields=name,description
+```
+
+## Webhooks
+
+### Configuração
+```json
+{
+  "url": "https://sua-app.com/webhooks/sofia",
+  "events": ["call.started", "call.ended", "assistant.created"],
+  "secret": "webhook_secret_key"
+}
+```
+
+### Eventos Disponíveis
+- `call.started` - Ligação iniciada
+- `call.ended` - Ligação finalizada
+- `call.transferred` - Ligação transferida
+- `assistant.created` - Assistente criado
+- `assistant.updated` - Assistente atualizado
+- `campaign.started` - Campanha iniciada
+- `campaign.completed` - Campanha finalizada
+
+## SDKs Oficiais
+
+### JavaScript/Node.js
+```bash
+npm install @sofia-ai/sdk
+```
+
+```javascript
+import Sofia from '@sofia-ai/sdk';
+
+const sofia = new Sofia('sua_api_key');
+
+const assistant = await sofia.assistants.create({
+  name: 'Meu Assistente',
+  prompt: 'Você é um assistente de vendas...'
+});
+```
+
+### Python
+```bash
+pip install sofia-ai
+```
+
+```python
+import sofia
+
+client = sofia.Client('sua_api_key')
+
+assistant = client.assistants.create(
+    name='Meu Assistente',
+    prompt='Você é um assistente de vendas...'
+)
+```
+
+### PHP
+```bash
+composer require sofia-ai/php-sdk
+```
+
+```php
+use Sofia\Client;
+
+$sofia = new Client('sua_api_key');
+
+$assistant = $sofia->assistants->create([
+    'name' => 'Meu Assistente',
+    'prompt' => 'Você é um assistente de vendas...'
+]);
+```
+
+## Exemplos Práticos
+
+### Criar um Assistente
+```bash
+curl -X POST "https://api.sofia.ai/v1/assistants" \
+  -H "Authorization: Bearer sua_api_key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Assistente de Vendas",
+    "prompt": "Você é um vendedor experiente...",
+    "voice": "ana",
+    "language": "pt-BR"
+  }'
+```
+
+### Iniciar uma Ligação
+```bash
+curl -X POST "https://api.sofia.ai/v1/calls" \
+  -H "Authorization: Bearer sua_api_key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "assistant_id": "asst_1234567890",
+    "phone_number": "+5511999999999",
+    "caller_id": "+5511888888888"
+  }'
+```
+
+### Consultar Status de Ligação
+```bash
+curl -X GET "https://api.sofia.ai/v1/calls/call_1234567890" \
+  -H "Authorization: Bearer sua_api_key"
+```
+
+## Ambientes
+
+### Produção
+```
+https://api.sofia.ai/v1
+```
+
+### Sandbox (Testes)
+```
+https://sandbox-api.sofia.ai/v1
+```
+
 <Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
+  **Dica**: Use sempre o ambiente sandbox para testes. Ligações no sandbox não são cobradas e não fazem ligações reais.
 </Note>
 
-## Welcome
+## Suporte e Recursos
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+### Documentação Adicional
+- [Guia de Início Rápido](/api-reference/quickstart)
+- [Exemplos de Código](https://github.com/sofia-ai/examples)
+- [Postman Collection](https://postman.com/sofia-ai)
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+### Suporte Técnico
+- **Email**: dev@sofia.ai
+- **Discord**: [Comunidade Sofia](https://discord.gg/sofia)
+- **Status**: [status.sofia.ai](https://status.sofia.ai)
 
-## Authentication
+### Changelog
+Acompanhe as atualizações da API:
+- [Changelog Completo](/api-reference/changelog)
+- [Breaking Changes](/api-reference/breaking-changes)
+- [Roadmap](/api-reference/roadmap)
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+## Próximos Passos
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
-```
+Explore os endpoints específicos:
+
+<CardGroup cols={2}>
+  <Card title="Assistentes" href="/api-reference/assistants">
+    Gerenciar assistentes de IA
+  </Card>
+  <Card title="Ligações" href="/api-reference/calls">
+    Controlar ligações telefônicas
+  </Card>
+  <Card title="Números" href="/api-reference/phone-numbers">
+    Gerenciar números de telefone
+  </Card>
+  <Card title="Campanhas" href="/api-reference/campaigns">
+    Executar campanhas em massa
+  </Card>
+</CardGroup>

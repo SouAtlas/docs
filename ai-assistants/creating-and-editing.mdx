@@ -1,0 +1,391 @@
+---
+title: "Criando e Editando uma Assistente de IA"
+description: "Guia completo para criar e configurar assistentes na Sofia"
+---
+
+# Criando e Editando uma Assistente de IA
+
+Este guia aborda todo o processo de criação e configuração de assistentes de IA na plataforma Sofia, desde a configuração inicial até otimizações avançadas.
+
+## Criando seu Primeiro Assistente
+
+### Passo 1: Acesso ao Dashboard
+1. Faça login na [plataforma Sofia](https://app.sofia.ai)
+2. Navegue até **"Assistentes"** no menu lateral
+3. Clique em **"Criar Novo Assistente"**
+
+### Passo 2: Informações Básicas
+Configure as informações fundamentais do seu assistente:
+
+<CardGroup cols={2}>
+  <Card title="Nome do Assistente" icon="user">
+    Escolha um nome que reflita a personalidade e função
+  </Card>
+  <Card title="Descrição" icon="file-text">
+    Descreva brevemente o propósito e contexto de uso
+  </Card>
+  <Card title="Categoria" icon="folder">
+    Vendas, Atendimento, Cobrança, Pesquisa, etc.
+  </Card>
+  <Card title="Idioma Principal" icon="globe">
+    Português, Inglês, Espanhol ou outros idiomas suportados
+  </Card>
+</CardGroup>
+
+### Exemplo de Configuração Inicial
+```yaml
+Nome: "Ana - Assistente de Vendas"
+Descrição: "Assistente especializada em qualificação de leads e agendamento de demonstrações"
+Categoria: "Vendas"
+Idioma: "Português (Brasil)"
+```
+
+## Configuração do Prompt de Sistema
+
+### Estrutura Recomendada
+O prompt de sistema é o elemento mais importante do seu assistente. Siga esta estrutura:
+
+```
+[IDENTIDADE]
+Você é [Nome], [função] da [empresa].
+Você é [características de personalidade].
+
+[OBJETIVO PRINCIPAL]
+Seu objetivo é [objetivo específico e mensurável].
+
+[CONHECIMENTO]
+Você tem conhecimento sobre:
+- [área 1]
+- [área 2]
+- [área 3]
+
+[COMPORTAMENTO]
+Durante as conversas você deve:
+- [comportamento 1]
+- [comportamento 2]
+- [comportamento 3]
+
+[LIMITAÇÕES]
+Você NÃO deve:
+- [limitação 1]
+- [limitação 2]
+- [limitação 3]
+
+[ESCALAÇÃO]
+Transfira a ligação para um humano quando:
+- [situação 1]
+- [situação 2]
+```
+
+### Exemplos por Categoria
+
+<Tabs>
+  <Tab title="Vendas">
+    ```
+    Você é Ana, consultora de vendas da TechSolutions.
+    Você é entusiasta, consultiva e focada em resultados.
+
+    Seu objetivo é qualificar leads e agendar demonstrações do nosso software.
+
+    Você tem conhecimento sobre:
+    - Nossos produtos: CRM Pro, Analytics Plus, Mobile Suite
+    - Preços e condições comerciais
+    - Processo de implementação
+    - Cases de sucesso
+
+    Durante as conversas você deve:
+    - Fazer perguntas qualificadoras (BANT)
+    - Apresentar benefícios relevantes ao perfil do cliente
+    - Criar senso de urgência quando apropriado
+    - Sempre tentar agendar uma demonstração
+
+    Você NÃO deve:
+    - Dar descontos sem aprovação
+    - Prometer funcionalidades que não existem
+    - Pressionar excessivamente o cliente
+
+    Transfira para um humano quando:
+    - Cliente solicitar desconto acima de 20%
+    - Houver objeções técnicas complexas
+    - Cliente demonstrar irritação ou desconforto
+    ```
+  </Tab>
+  <Tab title="Atendimento">
+    ```
+    Você é Carlos, assistente de atendimento da Clínica Saúde+.
+    Você é empático, paciente e sempre disposto a ajudar.
+
+    Seu objetivo é resolver dúvidas e agendar consultas para nossos pacientes.
+
+    Você tem conhecimento sobre:
+    - Especialidades médicas disponíveis
+    - Horários de funcionamento
+    - Procedimentos de agendamento
+    - Convênios aceitos
+
+    Durante as conversas você deve:
+    - Ouvir atentamente as necessidades do paciente
+    - Fazer perguntas para entender melhor o caso
+    - Oferecer soluções práticas e rápidas
+    - Confirmar todas as informações coletadas
+
+    Você NÃO deve:
+    - Dar conselhos médicos ou diagnósticos
+    - Prometer consultas em horários indisponíveis
+    - Compartilhar informações de outros pacientes
+
+    Transfira para um humano quando:
+    - Paciente relatar emergência médica
+    - Houver reclamações sobre atendimento
+    - Situações que exijam análise médica
+    ```
+  </Tab>
+  <Tab title="Cobrança">
+    ```
+    Você é Roberto, assistente de cobrança da FinanceMax.
+    Você é profissional, respeitoso mas firme nas negociações.
+
+    Seu objetivo é negociar pagamentos de débitos em atraso.
+
+    Você tem conhecimento sobre:
+    - Políticas de cobrança da empresa
+    - Opções de parcelamento disponíveis
+    - Descontos para pagamento à vista
+    - Consequências do não pagamento
+
+    Durante as conversas você deve:
+    - Confirmar a identidade do devedor
+    - Apresentar o débito de forma clara
+    - Oferecer opções de pagamento
+    - Registrar acordos firmados
+
+    Você NÃO deve:
+    - Ser agressivo ou desrespeitoso
+    - Ameaçar com consequências não reais
+    - Aceitar acordos fora da política
+
+    Transfira para um humano quando:
+    - Cliente contestar o débito
+    - Solicitar parcelamento em mais de 12x
+    - Demonstrar dificuldades financeiras extremas
+    ```
+  </Tab>
+</Tabs>
+
+## Configuração de Voz
+
+### Tipos de Voz Disponíveis
+
+#### Vozes Pré-definidas
+A Sofia oferece uma biblioteca de vozes profissionais:
+
+| Nome | Gênero | Idade | Características |
+|------|--------|-------|-----------------|
+| Ana | Feminino | 30-35 | Profissional, amigável |
+| Carlos | Masculino | 35-40 | Confiável, experiente |
+| Beatriz | Feminino | 25-30 | Jovem, energética |
+| Roberto | Masculino | 40-45 | Sério, autoritativo |
+| Camila | Feminino | 28-33 | Calorosa, empática |
+
+#### Clonagem de Voz
+Para criar uma voz personalizada:
+
+1. **Gravação de amostras**: 10-15 minutos de áudio limpo
+2. **Processamento**: 24-48 horas para treinamento
+3. **Testes**: Validação de qualidade e naturalidade
+4. **Ativação**: Disponibilização para uso
+
+### Parâmetros de Voz
+
+<CardGroup cols={2}>
+  <Card title="Velocidade" icon="gauge">
+    0.8x (lenta) a 1.3x (rápida) - padrão: 1.0x
+  </Card>
+  <Card title="Tom" icon="music">
+    -20% (grave) a +20% (agudo) - padrão: 0%
+  </Card>
+  <Card title="Pausas" icon="pause">
+    Curtas, normais ou longas entre frases
+  </Card>
+  <Card title="Emoção" icon="smile">
+    Neutra, alegre, séria, empática
+  </Card>
+</CardGroup>
+
+## Ferramentas e Funções
+
+### Configurando Ferramentas
+As ferramentas permitem que o assistente execute ações específicas:
+
+#### 1. Agendamento de Compromissos
+```json
+{
+  "nome": "agendar_compromisso",
+  "descricao": "Agenda um compromisso no calendário",
+  "parametros": {
+    "nome_cliente": "string",
+    "telefone": "string",
+    "data": "date",
+    "horario": "time",
+    "tipo_servico": "string"
+  },
+  "endpoint": "https://api.empresa.com/agenda",
+  "metodo": "POST"
+}
+```
+
+#### 2. Consulta de Dados
+```json
+{
+  "nome": "consultar_cliente",
+  "descricao": "Busca informações do cliente no CRM",
+  "parametros": {
+    "telefone": "string"
+  },
+  "endpoint": "https://api.empresa.com/clientes/{telefone}",
+  "metodo": "GET"
+}
+```
+
+#### 3. Cálculo de Valores
+```json
+{
+  "nome": "calcular_proposta",
+  "descricao": "Calcula valor da proposta com descontos",
+  "parametros": {
+    "produto": "string",
+    "quantidade": "number",
+    "desconto": "number"
+  },
+  "logica": "valor_base * quantidade * (1 - desconto/100)"
+}
+```
+
+### Configuração de Integrações
+
+#### Webhooks
+Configure URLs para receber notificações:
+- Início de ligação
+- Fim de ligação
+- Dados coletados
+- Ações executadas
+
+#### APIs Externas
+Conecte com sistemas existentes:
+- CRM (Salesforce, HubSpot, Pipedrive)
+- ERP (SAP, Oracle, Totvs)
+- Calendários (Google, Outlook)
+- Pagamentos (PagSeguro, Mercado Pago)
+
+## Configurações Avançadas
+
+### Sensibilidade à Fala
+Ajuste como o assistente reage a interrupções:
+
+```yaml
+Configuração Conservadora:
+  - Aguarda 2 segundos de silêncio
+  - Permite poucas interrupções
+  - Ideal para: Pesquisas, coleta de dados
+
+Configuração Balanceada:
+  - Aguarda 1 segundo de silêncio
+  - Permite interrupções moderadas
+  - Ideal para: Vendas, atendimento geral
+
+Configuração Agressiva:
+  - Aguarda 0.5 segundos de silêncio
+  - Permite muitas interrupções
+  - Ideal para: Conversas dinâmicas
+```
+
+### Tratamento de Erros
+Configure como o assistente lida com problemas:
+
+```yaml
+Não Compreensão:
+  - Primeira vez: "Desculpe, não entendi. Pode repetir?"
+  - Segunda vez: "Vou reformular a pergunta..."
+  - Terceira vez: "Vou transferir para um atendente"
+
+Erro de Sistema:
+  - "Estou com uma dificuldade técnica momentânea"
+  - "Vou transferir para garantir o melhor atendimento"
+
+Timeout:
+  - Após 10s: "Você ainda está aí?"
+  - Após 20s: "Vou aguardar mais um momento"
+  - Após 30s: "Obrigado pelo contato, até logo!"
+```
+
+## Testando seu Assistente
+
+### Testes Básicos
+1. **Teste de saudação**: Verifique a mensagem inicial
+2. **Teste de fluxo**: Simule conversas completas
+3. **Teste de ferramentas**: Valide integrações
+4. **Teste de escalação**: Confirme transferências
+
+### Testes Avançados
+1. **Teste de interrupções**: Fale durante as respostas
+2. **Teste de ruído**: Simule ambientes barulhentos
+3. **Teste de sotaques**: Use diferentes formas de falar
+4. **Teste de edge cases**: Situações incomuns
+
+### Métricas de Qualidade
+- **Taxa de compreensão**: > 95%
+- **Tempo de resposta**: < 2 segundos
+- **Taxa de escalação**: < 10%
+- **Satisfação do usuário**: > 4.5/5
+
+## Otimização e Melhoria Contínua
+
+### Análise de Conversas
+Revise regularmente:
+- Gravações de ligações (quando permitido)
+- Logs de interação
+- Pontos de abandono
+- Feedback dos usuários
+
+### Ajustes Baseados em Dados
+- **Prompts**: Refine baseado em mal-entendidos
+- **Voz**: Ajuste velocidade e tom conforme feedback
+- **Fluxos**: Otimize baseado em taxa de conversão
+- **Ferramentas**: Melhore baseado em erros
+
+### A/B Testing
+Teste diferentes versões:
+- Prompts alternativos
+- Vozes diferentes
+- Abordagens de venda
+- Mensagens iniciais
+
+<Warning>
+  **Importante**: Sempre teste extensivamente antes de colocar um assistente em produção. Pequenos ajustes podem ter grande impacto na performance.
+</Warning>
+
+## Checklist de Lançamento
+
+Antes de ativar seu assistente:
+
+- [ ] Prompt de sistema testado e validado
+- [ ] Voz configurada e aprovada
+- [ ] Ferramentas testadas e funcionando
+- [ ] Integrações validadas
+- [ ] Fluxos de escalação definidos
+- [ ] Métricas de monitoramento configuradas
+- [ ] Equipe treinada para receber transferências
+- [ ] Backup e contingência planejados
+
+## Próximos Passos
+
+Agora que você sabe criar assistentes:
+
+1. **[Configure ferramentas](/ai-assistants/tools-and-functions)** - Adicione funcionalidades
+2. **[Selecione a voz](/ai-assistants/voice-selection)** - Escolha a voz ideal
+3. **[Teste seu assistente](/ai-assistants/testing)** - Valide antes de lançar
+4. **[Configure números](/phone-numbers/purchasing-and-managing)** - Prepare a infraestrutura
+
+<Note>
+  Lembre-se: um assistente bem configurado é resultado de iteração constante. Comece simples e vá refinando baseado em dados reais de uso.
+</Note>

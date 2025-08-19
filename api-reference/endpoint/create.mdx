@@ -1,4 +1,474 @@
 ---
-title: 'Create Plant'
-openapi: 'POST /plants'
+title: "Criar Assistente"
+api: "POST https://api.sofia.ai/v1/assistants"
+description: "Cria um novo assistente de IA na plataforma Sofia"
 ---
+
+# Criar Assistente
+
+Cria um novo assistente de IA com as configurações especificadas.
+
+## Endpoint
+
+```http
+POST https://api.sofia.ai/v1/assistants
+```
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Bearer token com sua API key
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  application/json
+</ParamField>
+
+## Body Parameters
+
+<ParamField body="name" type="string" required>
+  Nome do assistente (máximo 100 caracteres)
+</ParamField>
+
+<ParamField body="description" type="string">
+  Descrição do assistente (máximo 500 caracteres)
+</ParamField>
+
+<ParamField body="prompt" type="string" required>
+  Prompt de sistema que define o comportamento do assistente
+</ParamField>
+
+<ParamField body="voice" type="string" required>
+  ID da voz a ser utilizada. Opções: "ana", "carlos", "beatriz", "roberto", "camila" ou ID de voz clonada
+</ParamField>
+
+<ParamField body="language" type="string" required>
+  Código do idioma (ISO 639-1). Ex: "pt-BR", "en-US", "es-ES"
+</ParamField>
+
+<ParamField body="voice_settings" type="object">
+  Configurações avançadas de voz
+  <Expandable title="voice_settings">
+    <ParamField body="speed" type="number">
+      Velocidade da fala (0.5 a 2.0, padrão: 1.0)
+    </ParamField>
+    <ParamField body="pitch" type="number">
+      Tom da voz (-20 a 20, padrão: 0)
+    </ParamField>
+    <ParamField body="emotion" type="string">
+      Emoção da voz: "neutral", "happy", "serious", "empathetic"
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="tools" type="array">
+  Lista de ferramentas disponíveis para o assistente
+  <Expandable title="tools">
+    <ParamField body="name" type="string">
+      Nome da ferramenta
+    </ParamField>
+    <ParamField body="description" type="string">
+      Descrição da funcionalidade
+    </ParamField>
+    <ParamField body="parameters" type="object">
+      Parâmetros aceitos pela ferramenta
+    </ParamField>
+    <ParamField body="endpoint" type="string">
+      URL do endpoint (para ferramentas API)
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField body="knowledge_base" type="array">
+  IDs das bases de conhecimento a serem utilizadas
+</ParamField>
+
+<ParamField body="settings" type="object">
+  Configurações avançadas do assistente
+  <Expandable title="settings">
+    <ParamField body="interruption_sensitivity" type="string">
+      Sensibilidade a interrupções: "low", "medium", "high"
+    </ParamField>
+    <ParamField body="response_timeout" type="number">
+      Timeout para resposta em segundos (1-30, padrão: 10)
+    </ParamField>
+    <ParamField body="max_conversation_time" type="number">
+      Tempo máximo de conversa em segundos (60-3600, padrão: 1800)
+    </ParamField>
+    <ParamField body="transfer_conditions" type="array">
+      Condições para transferência automática
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+## Request Example
+
+<CodeGroup>
+
+```bash cURL
+curl -X POST "https://api.sofia.ai/v1/assistants" \
+  -H "Authorization: Bearer sk_live_1234567890abcdef" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Assistente de Vendas",
+    "description": "Assistente especializado em qualificação de leads",
+    "prompt": "Você é Ana, consultora de vendas da TechSolutions. Você é entusiasta, consultiva e focada em resultados. Seu objetivo é qualificar leads e agendar demonstrações.",
+    "voice": "ana",
+    "language": "pt-BR",
+    "voice_settings": {
+      "speed": 1.1,
+      "pitch": 2,
+      "emotion": "happy"
+    },
+    "tools": [
+      {
+        "name": "agendar_demonstracao",
+        "description": "Agenda uma demonstração do produto",
+        "parameters": {
+          "nome": "string",
+          "email": "string",
+          "telefone": "string",
+          "data_preferida": "date",
+          "produto_interesse": "string"
+        },
+        "endpoint": "https://api.empresa.com/agendamentos"
+      }
+    ],
+    "settings": {
+      "interruption_sensitivity": "medium",
+      "response_timeout": 8,
+      "max_conversation_time": 900
+    }
+  }'
+```
+
+```javascript JavaScript
+const response = await fetch('https://api.sofia.ai/v1/assistants', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer sk_live_1234567890abcdef',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: 'Assistente de Vendas',
+    description: 'Assistente especializado em qualificação de leads',
+    prompt: 'Você é Ana, consultora de vendas da TechSolutions...',
+    voice: 'ana',
+    language: 'pt-BR',
+    voice_settings: {
+      speed: 1.1,
+      pitch: 2,
+      emotion: 'happy'
+    },
+    tools: [{
+      name: 'agendar_demonstracao',
+      description: 'Agenda uma demonstração do produto',
+      parameters: {
+        nome: 'string',
+        email: 'string',
+        telefone: 'string',
+        data_preferida: 'date',
+        produto_interesse: 'string'
+      },
+      endpoint: 'https://api.empresa.com/agendamentos'
+    }],
+    settings: {
+      interruption_sensitivity: 'medium',
+      response_timeout: 8,
+      max_conversation_time: 900
+    }
+  })
+});
+
+const assistant = await response.json();
+```
+
+```python Python
+import requests
+
+url = "https://api.sofia.ai/v1/assistants"
+headers = {
+    "Authorization": "Bearer sk_live_1234567890abcdef",
+    "Content-Type": "application/json"
+}
+
+data = {
+    "name": "Assistente de Vendas",
+    "description": "Assistente especializado em qualificação de leads",
+    "prompt": "Você é Ana, consultora de vendas da TechSolutions...",
+    "voice": "ana",
+    "language": "pt-BR",
+    "voice_settings": {
+        "speed": 1.1,
+        "pitch": 2,
+        "emotion": "happy"
+    },
+    "tools": [{
+        "name": "agendar_demonstracao",
+        "description": "Agenda uma demonstração do produto",
+        "parameters": {
+            "nome": "string",
+            "email": "string",
+            "telefone": "string",
+            "data_preferida": "date",
+            "produto_interesse": "string"
+        },
+        "endpoint": "https://api.empresa.com/agendamentos"
+    }],
+    "settings": {
+        "interruption_sensitivity": "medium",
+        "response_timeout": 8,
+        "max_conversation_time": 900
+    }
+}
+
+response = requests.post(url, headers=headers, json=data)
+assistant = response.json()
+```
+
+```php PHP
+<?php
+$url = 'https://api.sofia.ai/v1/assistants';
+$headers = [
+    'Authorization: Bearer sk_live_1234567890abcdef',
+    'Content-Type: application/json'
+];
+
+$data = [
+    'name' => 'Assistente de Vendas',
+    'description' => 'Assistente especializado em qualificação de leads',
+    'prompt' => 'Você é Ana, consultora de vendas da TechSolutions...',
+    'voice' => 'ana',
+    'language' => 'pt-BR',
+    'voice_settings' => [
+        'speed' => 1.1,
+        'pitch' => 2,
+        'emotion' => 'happy'
+    ],
+    'tools' => [[
+        'name' => 'agendar_demonstracao',
+        'description' => 'Agenda uma demonstração do produto',
+        'parameters' => [
+            'nome' => 'string',
+            'email' => 'string',
+            'telefone' => 'string',
+            'data_preferida' => 'date',
+            'produto_interesse' => 'string'
+        ],
+        'endpoint' => 'https://api.empresa.com/agendamentos'
+    ]],
+    'settings' => [
+        'interruption_sensitivity' => 'medium',
+        'response_timeout' => 8,
+        'max_conversation_time' => 900
+    ]
+];
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$response = curl_exec($ch);
+$assistant = json_decode($response, true);
+curl_close($ch);
+?>
+```
+
+</CodeGroup>
+
+## Response
+
+<ResponseField name="success" type="boolean">
+  Indica se a operação foi bem-sucedida
+</ResponseField>
+
+<ResponseField name="data" type="object">
+  Dados do assistente criado
+  <Expandable title="data">
+    <ResponseField name="id" type="string">
+      ID único do assistente (formato: asst_xxxxxxxxxx)
+    </ResponseField>
+    <ResponseField name="name" type="string">
+      Nome do assistente
+    </ResponseField>
+    <ResponseField name="description" type="string">
+      Descrição do assistente
+    </ResponseField>
+    <ResponseField name="status" type="string">
+      Status atual: "active", "inactive", "training"
+    </ResponseField>
+    <ResponseField name="voice" type="string">
+      ID da voz configurada
+    </ResponseField>
+    <ResponseField name="language" type="string">
+      Idioma configurado
+    </ResponseField>
+    <ResponseField name="created_at" type="string">
+      Data de criação (ISO 8601)
+    </ResponseField>
+    <ResponseField name="updated_at" type="string">
+      Data da última atualização (ISO 8601)
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="meta" type="object">
+  Metadados da requisição
+  <Expandable title="meta">
+    <ResponseField name="timestamp" type="string">
+      Timestamp da resposta
+    </ResponseField>
+    <ResponseField name="request_id" type="string">
+      ID único da requisição
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+## Response Example
+
+<CodeGroup>
+
+```json 201 Created
+{
+  "success": true,
+  "data": {
+    "id": "asst_1234567890abcdef",
+    "name": "Assistente de Vendas",
+    "description": "Assistente especializado em qualificação de leads",
+    "status": "active",
+    "voice": "ana",
+    "language": "pt-BR",
+    "voice_settings": {
+      "speed": 1.1,
+      "pitch": 2,
+      "emotion": "happy"
+    },
+    "tools": [
+      {
+        "name": "agendar_demonstracao",
+        "description": "Agenda uma demonstração do produto",
+        "parameters": {
+          "nome": "string",
+          "email": "string",
+          "telefone": "string",
+          "data_preferida": "date",
+          "produto_interesse": "string"
+        },
+        "endpoint": "https://api.empresa.com/agendamentos"
+      }
+    ],
+    "settings": {
+      "interruption_sensitivity": "medium",
+      "response_timeout": 8,
+      "max_conversation_time": 900
+    },
+    "created_at": "2024-01-15T10:30:00Z",
+    "updated_at": "2024-01-15T10:30:00Z"
+  },
+  "meta": {
+    "timestamp": "2024-01-15T10:30:00Z",
+    "request_id": "req_abcdef123456"
+  }
+}
+```
+
+```json 400 Bad Request
+{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Dados de entrada inválidos",
+    "details": {
+      "field": "prompt",
+      "message": "O campo 'prompt' é obrigatório"
+    }
+  },
+  "meta": {
+    "timestamp": "2024-01-15T10:30:00Z",
+    "request_id": "req_abcdef123456"
+  }
+}
+```
+
+```json 401 Unauthorized
+{
+  "success": false,
+  "error": {
+    "code": "UNAUTHORIZED",
+    "message": "API key inválida ou ausente"
+  },
+  "meta": {
+    "timestamp": "2024-01-15T10:30:00Z",
+    "request_id": "req_abcdef123456"
+  }
+}
+```
+
+</CodeGroup>
+
+## Error Codes
+
+<ResponseField name="VALIDATION_ERROR" type="400">
+  Dados de entrada inválidos ou campos obrigatórios ausentes
+</ResponseField>
+
+<ResponseField name="UNAUTHORIZED" type="401">
+  API key inválida, ausente ou sem permissões
+</ResponseField>
+
+<ResponseField name="FORBIDDEN" type="403">
+  Operação não permitida para sua conta
+</ResponseField>
+
+<ResponseField name="QUOTA_EXCEEDED" type="429">
+  Limite de assistentes atingido para seu plano
+</ResponseField>
+
+<ResponseField name="INTERNAL_ERROR" type="500">
+  Erro interno do servidor
+</ResponseField>
+
+## Validações
+
+### Nome do Assistente
+- Mínimo: 3 caracteres
+- Máximo: 100 caracteres
+- Caracteres permitidos: letras, números, espaços, hífen
+
+### Prompt de Sistema
+- Mínimo: 50 caracteres
+- Máximo: 8000 caracteres
+- Deve conter instruções claras sobre o comportamento
+
+### Voz
+- Deve ser um ID válido de voz disponível
+- Vozes clonadas devem estar ativas na conta
+
+### Ferramentas
+- Máximo: 20 ferramentas por assistente
+- Endpoints devem ser URLs válidas e acessíveis
+- Parâmetros devem seguir schema JSON válido
+
+## Limites por Plano
+
+| Plano | Assistentes | Ferramentas/Assistente | Prompt (chars) |
+|-------|-------------|------------------------|----------------|
+| Starter | 3 | 5 | 4,000 |
+| Professional | 10 | 15 | 6,000 |
+| Enterprise | Ilimitado | 20 | 8,000 |
+
+## Próximos Passos
+
+Após criar um assistente:
+
+1. **[Teste o assistente](/ai-assistants/testing)** - Valide o comportamento
+2. **[Configure números](/phone-numbers/assigning-to-assistants)** - Atribua números
+3. **[Inicie ligações](/api-reference/endpoint/create-call)** - Comece a usar
+4. **[Monitore métricas](/analytics/assistants)** - Acompanhe performance
+
+<Note>
+  **Dica**: Comece com configurações simples e vá adicionando complexidade gradualmente. Teste sempre em ambiente sandbox antes de usar em produção.
+</Note>

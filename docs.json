@@ -1,63 +1,143 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Sofia - Plataforma de IA",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#6366F1",
+    "light": "#8B5CF6",
+    "dark": "#4F46E5"
   },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Guia da Plataforma",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Introdução",
             "pages": [
-              "index",
-              "quickstart",
-              "development"
+              "introduction/what-is-sofia",
+              "introduction/how-it-works",
+              "introduction/key-terminology"
             ]
           },
           {
-            "group": "Customization",
+            "group": "Iniciar",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "getting-started/core-concepts",
+              "getting-started/understanding-billing"
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Visão Geral dos Assistentes",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "ai-assistants/what-is-ai-assistant",
+              "ai-assistants/system-prompt",
+              "ai-assistants/initial-message",
+              "ai-assistants/creating-and-editing",
+              "ai-assistants/tools-and-functions",
+              "ai-assistants/voice-selection",
+              "ai-assistants/filler-audio",
+              "ai-assistants/cal-com-scheduling",
+              "ai-assistants/testing"
             ]
           },
           {
-            "group": "AI tools",
+            "group": "Números de Telefone",
             "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              "phone-numbers/types",
+              "phone-numbers/purchasing-and-managing",
+              "phone-numbers/pricing-and-regions",
+              "phone-numbers/sms-capabilities",
+              "phone-numbers/assigning-to-assistants"
+            ]
+          },
+          {
+            "group": "Ligações Receptivas",
+            "pages": [
+              "inbound-calls/overview",
+              "inbound-calls/provisioning",
+              "inbound-calls/configuring",
+              "inbound-calls/insights"
+            ]
+          },
+          {
+            "group": "Ligações Ativas",
+            "pages": [
+              "outbound-calls/overview",
+              "outbound-calls/campaigns",
+              "outbound-calls/caller-id",
+              "outbound-calls/voicemail-handling",
+              "outbound-calls/scripts-and-prompts",
+              "outbound-calls/mass-dialing"
+            ]
+          },
+          {
+            "group": "Design de Conversação e Prompts de IA",
+            "pages": [
+              "conversation-design/prompt-basics",
+              "conversation-design/knowledge-bases",
+              "conversation-design/interruptions",
+              "conversation-design/language-support"
+            ]
+          },
+          {
+            "group": "Automação e Integração",
+            "pages": [
+              "automation/overview",
+              "automation/webhook-api",
+              "provisioning/phone-system-integrations"
+            ]
+          },
+          {
+            "group": "Custos e Preços",
+            "pages": [
+              "pricing/overview",
+              "pricing/usage-based",
+              "pricing/number-rentals"
+            ]
+          },
+          {
+            "group": "Provisionamento de Números",
+            "pages": [
+              "provisioning/supported-countries",
+              "provisioning/managing-numbers"
+            ]
+          },
+          {
+            "group": "Solução de Problemas e FAQ",
+            "pages": [
+              "troubleshooting/voice-problems",
+              "troubleshooting/billing",
+              "troubleshooting/call-quality",
+              "troubleshooting/ai-behavior"
             ]
           }
         ]
       },
       {
-        "tab": "API reference",
+        "tab": "Automação No-Code",
         "groups": [
           {
-            "group": "API documentation",
+            "group": "Introdução",
+            "pages": [
+              "automation-platform/introduction",
+              "automation-platform/tutorials"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API",
+        "groups": [
+          {
+            "group": "API Documentation",
             "pages": [
               "api-reference/introduction"
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Endpoints",
             "pages": [
               "api-reference/endpoint/get",
               "api-reference/endpoint/create",
@@ -66,23 +146,34 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "White Label",
+        "groups": [
+          {
+            "group": "Visão Geral",
+            "pages": [
+              "white-label/overview"
+            ]
+          }
+        ]
       }
     ],
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
+          "anchor": "Suporte",
+          "href": "mailto:suporte@sofia.ai",
+          "icon": "headset"
         },
         {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
+          "anchor": "Comunidade",
+          "href": "https://discord.gg/sofia",
+          "icon": "discord"
         },
         {
           "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
+          "href": "https://blog.sofia.ai",
           "icon": "newspaper"
         }
       ]
@@ -95,33 +186,33 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "label": "Suporte",
+        "href": "mailto:suporte@sofia.ai"
       }
     ],
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
+      "href": "https://app.sofia.ai"
     }
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "x": "https://x.com/sofia_ai",
+      "github": "https://github.com/sofia-ai",
+      "linkedin": "https://linkedin.com/company/sofia-ai"
     }
   }
 }
